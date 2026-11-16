@@ -1,5 +1,5 @@
 // Mis Gastos: funciona sin conexión. Red primero para la app (así llegan las actualizaciones), caché como respaldo.
-const C = "mis-gastos-v1";
+const C = "mis-gastos-v2";
 const SHELL = ["./", "./index.html", "./manifest.webmanifest", "./icon-180.png", "./icon-192.png"];
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(C).then(c => c.addAll(SHELL)).then(() => self.skipWaiting()));
