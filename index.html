@@ -347,6 +347,9 @@ nav .badge.crit{background:var(--crit)} nav .badge.warn{background:var(--warn-fi
 .k.ok svg{width:26px;height:26px;stroke-width:2.4}
 .k.cm{font:600 28px/1 var(--f-num)}
 /* gasto / ingreso */
+.pick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pick .btn{flex-direction:column;gap:6px;min-height:92px;font:italic 500 22px/1 var(--f-display)}
+.pick .btn svg{width:26px;height:26px;stroke-width:2.2}
 .kseg{display:flex;padding:3px;border-radius:99px;background:var(--soft);border:1px solid var(--line)}
 .kseg button{min-height:34px;padding:0 16px;border-radius:99px;font:italic 500 18px/1 var(--f-display);color:var(--muted);transition:background .2s,color .2s}
 .kseg button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
@@ -396,7 +399,7 @@ main.enter .tcol span{animation:barup .8s var(--ease) both;animation-delay:calc(
   <nav aria-label="Secciones">
     <a href="#inicio" data-tab="inicio"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20H15v-6H9v6H4z"/></svg>Inicio</a>
     <a href="#gastos" data-tab="gastos"><svg viewBox="0 0 24 24"><path d="M6 3.5h12v17l-2-1.4-2 1.4-2-1.4-2 1.4-2-1.4-2 1.4z"/><path d="M9 8.5h6M9 12h6M9 15.5h3"/></svg>Movimientos</a>
-    <button type="button" class="fab" data-act="add" aria-label="Añadir gasto"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+    <button type="button" class="fab" data-act="menu" aria-label="Añadir gasto o ingreso" aria-haspopup="dialog"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
     <a href="#plan" data-tab="plan"><svg viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2.2"/><circle cx="9" cy="17" r="2.2"/></svg>Plan</a>
     <a href="#avisos" data-tab="avisos"><svg viewBox="0 0 24 24"><path d="M6 16v-5a6 6 0 1 1 12 0v5l1.8 2H4.2zM10 21h4"/></svg>Avisos<span class="badge" id="badge" hidden></span></a>
   </nav>
@@ -857,6 +860,11 @@ function openEntry(e,key,kind){
   paintPad();paintWhen();paintSugg();
 }
 const openExpense=(e,key)=>openEntry(e,key,"out");
+/* El botón «+» pregunta primero: gasto o ingreso. */
+function openMenu(){
+  openSheet(`<div class="sheethead"><h3>¿Qué quieres apuntar?</h3><div class="hacts"><button type="button" class="x" data-act="close" aria-label="Cerrar">${SVG.x}</button></div></div>
+  <div class="pick"><button type="button" class="btn" data-act="add"><svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg>Gasto</button><button type="button" class="btn in" data-act="add-in"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Ingreso</button></div>`,"menu");
+}
 function setKind(k){
   if(!editing||editing.type!=="exp"||editing.kind===k)return;
   editing.kind=k;
@@ -1036,7 +1044,8 @@ document.addEventListener("click",ev=>{
   const kp=ev.target.closest("[data-kp]");if(kp){press(kp.dataset.kp);return}
   const el=ev.target.closest("[data-act]");if(!el)return;
   const act=el.dataset.act,id=el.dataset.id,cfg=S.config;
-  if(act==="add")openEntry(null,null,V.tab==="gastos"&&V.fcat==="__in"?"in":"out");
+  if(act==="menu")openMenu();
+  else if(act==="add")openEntry(null,null,V.tab==="gastos"&&V.fcat==="__in"?"in":"out");
   else if(act==="add-in")openEntry(null,null,"in");
   else if(act==="kind")setKind(el.dataset.v);
   else if(act==="close"){if(el.id==="back"||el.closest("#sheet"))closeSheet()}

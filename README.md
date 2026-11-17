@@ -7,7 +7,7 @@ Los datos se guardan únicamente en el dispositivo; este repositorio solo contie
 ## Qué hace
 
 - **Inicio**: el total del mes impreso en un billete cuyo color cambia según vayas de presupuesto (verde, ocre o carmín), lo que te queda al día descontando los pagos fijos pendientes, previsión de fin de mes, comparación con el mes anterior, reparto por categorías, gasto día a día y los últimos 6 meses.
-- **Apuntar gasto o ingreso**: selector Gasto / Ingreso, teclado numérico propio (no abre el del iPhone), suma de varios importes con `+`, Hoy / Ayer / otro día, y sugerencias de nota que eligen la categoría solas y rellenan el último importe usado.
+- **Apuntar gasto o ingreso**: el botón «+» pregunta primero si quieres apuntar un gasto o un ingreso; dentro hay un selector Gasto / Ingreso, teclado numérico propio (no abre el del iPhone), suma de varios importes con `+`, Hoy / Ayer / otro día, y sugerencias de nota que eligen la categoría solas y rellenan el último importe usado.
 - **Ingresos**: nómina, extras, Bizum / transferencias, ventas y otros. Inicio muestra el balance del mes (lo que entra, lo que sale y cuánto ahorras). El presupuesto, los límites y los avisos cuentan solo los gastos.
 - **Movimientos**: gastos e ingresos juntos, búsqueda en el mes o en todos los meses, filtros y exportación a CSV.
 - **Plan**: presupuesto mensual, límites por categoría, pagos fijos, tema claro u oscuro, acceso rápido y copia de seguridad.
